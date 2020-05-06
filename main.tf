@@ -12,6 +12,8 @@ resource "aws_acm_certificate" "cert" {
   lifecycle {
     create_before_destroy = true
   }
+
+  tags = var.tags
 }
 
 data "aws_route53_zone" "zone" {

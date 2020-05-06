@@ -9,6 +9,12 @@ variable "domains" {
   description = "A map {\"zone.com.\" = [\"zone.com\",\"www.zone.com\"],\"foo.com\" = [\"foo.com\"] } of domains."
 }
 
+variable "tags" {
+  type        = map
+  description = "(Optional) Tags for the certificate"
+  default     = {}
+}
+
 locals {
   zones = keys(var.domains)
 
