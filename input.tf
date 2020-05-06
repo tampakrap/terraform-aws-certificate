@@ -1,3 +1,9 @@
+variable "main_domain" {
+  type        = string
+  description = "(Optional) The main domain of the certificate"
+  default     = ""
+}
+
 variable "domains" {
   type        = map(list(string))
   description = "A map {\"zone.com.\" = [\"zone.com\",\"www.zone.com\"],\"foo.com\" = [\"foo.com\"] } of domains."
@@ -8,7 +14,7 @@ locals {
 
   // We can't get the first index of an empty array, so we add a blank string element as a default so it doesn't blow
   // up when the domain map is empty.
-  domain = element(concat(local.domains, local.EMPTY_LIST), 0)
+  domain = var.main_domain != "" ? var.main_domain : element(concat(local.domains, local.EMPTY_LIST), 0)
 
   record_map = transpose(var.domains)
   domains    = compact(concat(keys(local.record_map), local.EMPTY_LIST))

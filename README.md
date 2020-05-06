@@ -45,6 +45,7 @@ No requirements.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | domains | A map {"zone.com." = ["zone.com","www.zone.com"],"foo.com" = ["foo.com"] } of domains. | `map(list(string))` | n/a | yes |
+| main\_domain | (Optional) The main domain of the certificate | `string` | `""` | no |
 
 ## Outputs
 
