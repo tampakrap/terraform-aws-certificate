@@ -20,8 +20,5 @@ locals {
   // If domains {} is empty the list will become [""], so we need to compact it.
   validations_needed = length(compact(distinct(split(",", replace(join(",", local.domains), "*.", "")))))
 
-  // Because of HCL limitations we can't slice an empty array because it won't understand it's internally a string
-  // type.
-  // So we add an empty element of type string which we then compact away into an empty array.
-  subject_alternative_names = compact(slice(concat(local.domains, local.EMPTY_LIST), 1, length(local.domains) + 1))
+  subject_alternative_names = [for domain in local.domains: domain if domain != local.domain]
 }
