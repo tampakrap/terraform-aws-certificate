@@ -29,17 +29,28 @@ resource "aws_cloudfront_distribution" "redirect" {
 }
 ```
 
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+| aws.required-acm-region | n/a |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| domains | Map of the zone names to records the certificate is for. | map | - | yes |
+|------|-------------|------|---------|:--------:|
+| domains | A map {"zone.com." = ["zone.com","www.zone.com"],"foo.com" = ["foo.com"] } of domains. | `map(list(string))` | n/a | yes |
 
 ## Outputs
 
-| Name | Description | Type |
-|------|-------------|:----:|
-| arn | The certificate arn | string |
+| Name | Description |
+|------|-------------|
+| arn | The certificate ARN. If the domains map is empty, it will be set to an empty string. |
 
 ## License
 
