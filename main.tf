@@ -1,6 +1,5 @@
 provider "aws" {
-  region = "us-east-1"
-  alias  = "required-acm-region"
+  alias  = "acm"
 }
 
 resource "aws_acm_certificate" "cert" {
@@ -8,7 +7,7 @@ resource "aws_acm_certificate" "cert" {
   domain_name               = local.domain
   subject_alternative_names = local.subject_alternative_names
   validation_method         = "DNS"
-  provider                  = aws.required-acm-region
+  provider                  = aws.acm
 
   lifecycle {
     create_before_destroy = true
@@ -51,5 +50,5 @@ resource "aws_acm_certificate_validation" "cert_validation" {
 
   validation_record_fqdns = aws_route53_record.records.*.fqdn
 
-  provider = aws.required-acm-region
+  provider = aws.acm
 }

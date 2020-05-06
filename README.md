@@ -38,7 +38,7 @@ No requirements.
 | Name | Version |
 |------|---------|
 | aws | n/a |
-| aws.required-acm-region | n/a |
+| aws.acm | n/a |
 
 ## Inputs
 
