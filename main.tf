@@ -29,18 +29,18 @@ resource "aws_route53_record" "records" {
   // * https://github.com/hashicorp/terraform/issues/17421
   count = local.validations_needed
 
-  name = lookup(aws_acm_certificate.cert.0.domain_validation_options[count.index], "resource_record_name")
-  type = lookup(aws_acm_certificate.cert.0.domain_validation_options[count.index], "resource_record_type")
+  name = lookup(local.unique_domain_validation_options[count.index], "resource_record_name")
+  type = lookup(local.unique_domain_validation_options[count.index], "resource_record_type")
 
   // It basically reverses the zone_name from the domain_name, then the zone_id from the zone_name.
   zone_id = element(matchkeys(
     data.aws_route53_zone.zone.*.id,
     data.aws_route53_zone.zone.*.name,
-    local.record_map[lookup(aws_acm_certificate.cert.0.domain_validation_options[count.index], "domain_name")]
+    local.record_map[lookup(local.unique_domain_validation_options[count.index], "domain_name")]
   ), 0)
 
   records = [
-    lookup(aws_acm_certificate.cert.0.domain_validation_options[count.index], "resource_record_value"),
+    lookup(local.unique_domain_validation_options[count.index], "resource_record_value"),
   ]
 
   ttl = 60

@@ -32,5 +32,8 @@ locals {
   // If domains {} is empty the list will become [""], so we need to compact it.
   validations_needed = length(compact(distinct(split(",", replace(join(",", local.domains), "*.", "")))))
 
+  // Create a new list of maps of domain validation options, to remove the duplicates from the wildcard domains
+  unique_domain_validation_options = [for item in aws_acm_certificate.cert.0.domain_validation_options: item if length(regexall("^\\*\\.", item["domain_name"])) == 0]
+
   subject_alternative_names = [for domain in local.domains: domain if domain != local.domain]
 }

@@ -53,10 +53,11 @@ No requirements.
 | Name | Description |
 |------|-------------|
 | arn | The certificate ARN. If the domains map is empty, it will be set to an empty string. |
-| domain\_validation\_options | A map of all the domain validation options of the certificate. |
+| domain\_validation\_options | A list of maps of all the domain validation options of the certificate. |
 | domains | A list of all the domains of the certificate. |
 | main\_domain | The main domain of the certificate. |
 | subject\_alternative\_names | The Subject Alternative Names of the certificate. |
+| unique\_domain\_validation\_options | A list of maps of the unique domain validation options of the certificate. |
 | zone\_ids | A list of all the zone IDs. |
 | zone\_names | A list of all the zone names. |
 

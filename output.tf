@@ -5,7 +5,12 @@ output "arn" {
 
 output "domain_validation_options" {
   value       = aws_acm_certificate.cert.0.domain_validation_options
-  description = "A map of all the domain validation options of the certificate."
+  description = "A list of maps of all the domain validation options of the certificate."
+}
+
+output "unique_domain_validation_options" {
+  value       = aws_acm_certificate.cert.0.domain_validation_options
+  description = "A list of maps of the unique domain validation options of the certificate."
 }
 
 output "main_domain" {
